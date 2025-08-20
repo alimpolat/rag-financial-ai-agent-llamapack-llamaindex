@@ -1,24 +1,51 @@
 {
   "name": "rag-financial-ai-agent",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.2.0",
+  "description": "A production-ready RAG system for financial document analysis using Next.js, FastAPI, and LlamaIndex",
+  "keywords": ["rag", "ai", "finance", "llm", "nextjs", "fastapi", "llamaindex", "ollama"],
+  "homepage": "https://github.com/yourusername/rag-financial-ai-agent#readme",
+  "bugs": {
+    "url": "https://github.com/yourusername/rag-financial-ai-agent/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/rag-financial-ai-agent.git"
+  },
+  "license": "MIT",
+  "author": "Your Name <your.email@example.com>",
+  "private": false,
   "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "type-check": "tsc --noEmit",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
+    "test:ci": "jest --coverage --watchAll=false --ci",
     "py:install": "python3 -m venv .venv && . .venv/bin/activate && pip install -r server/requirements.txt",
     "py:serve": ". .venv/bin/activate && uvicorn server.main:app --reload --host 0.0.0.0 --port ${PY_PORT:-8000}",
+    "py:serve:prod": ". .venv/bin/activate && uvicorn server.main:app --host 0.0.0.0 --port ${PY_PORT:-8000}",
     "py:eval": ". .venv/bin/activate && python -m server.cli_eval --questions ${QUESTIONS:-questions.text} --top-k ${TOP_K:-6}",
     "py:test": ". .venv/bin/activate && python -m pytest server/tests/ -v",
+    "py:test:coverage": ". .venv/bin/activate && python -m pytest server/tests/ --cov=server --cov-report=html --cov-report=term",
+    "py:lint": ". .venv/bin/activate && flake8 server/ && black --check server/ && isort --check-only server/",
+    "py:lint:fix": ". .venv/bin/activate && black server/ && isort server/",
+    "py:type-check": ". .venv/bin/activate && mypy server/",
     "docker:build": "docker-compose build",
     "docker:up": "docker-compose up -d",
     "docker:down": "docker-compose down",
-    "docker:logs": "docker-compose logs -f"
+    "docker:logs": "docker-compose logs -f",
+    "docker:clean": "docker-compose down -v --remove-orphans && docker system prune -f",
+    "ci": "npm run lint && npm run type-check && npm run test:ci && npm run build",
+    "prepare": "husky install || true",
+    "release": "semantic-release",
+    "clean": "rm -rf .next node_modules/.cache dist build coverage .pytest_cache .mypy_cache"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.0.2",
@@ -46,10 +73,18 @@
     "@testing-library/jest-dom": "^6.1.4",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.5.1",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
     "eslint": "^8.57.0",
     "eslint-config-next": "^14.2.5",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "husky": "^8.0.3",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
+    "lint-staged": "^15.2.2",
+    "prettier": "^3.2.5",
+    "semantic-release": "^23.0.2",
     "typescript": "^5.5.4"
   }
 }
