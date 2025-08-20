@@ -3,16 +3,16 @@
   "version": "0.2.0",
   "description": "A production-ready RAG system for financial document analysis using Next.js, FastAPI, and LlamaIndex",
   "keywords": ["rag", "ai", "finance", "llm", "nextjs", "fastapi", "llamaindex", "ollama"],
-  "homepage": "https://github.com/yourusername/rag-financial-ai-agent#readme",
+  "homepage": "https://github.com/alimpolat/rag-financial-ai-agent#readme",
   "bugs": {
-    "url": "https://github.com/yourusername/rag-financial-ai-agent/issues"
+    "url": "https://github.com/alimpolat/rag-financial-ai-agent/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yourusername/rag-financial-ai-agent.git"
+    "url": "git+https://github.com/alimpolat/rag-financial-ai-agent.git"
   },
   "license": "MIT",
-  "author": "Your Name <your.email@example.com>",
+  "author": "Ali Murat Polat <alimpolat@example.com>",
   "private": false,
   "type": "module",
   "scripts": {
