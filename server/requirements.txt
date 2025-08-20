@@ -1,0 +1,13 @@
+fastapi==0.111.0
+uvicorn[standard]==0.30.1
+python-multipart==0.0.9
+pydantic==2.8.2
+pydantic-settings==2.4.0
+python-dotenv==1.0.1
+pypdf==4.3.1
+llama-index==0.10.48
+llama-index-llms-ollama==0.2.2
+llama-index-embeddings-ollama==0.2.0
+python-docx==1.1.2
+beautifulsoup4==4.12.3
+ollama==0.3.1

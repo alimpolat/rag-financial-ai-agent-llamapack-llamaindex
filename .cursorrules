@@ -1,0 +1,70 @@
+# Cursor Rules for RAG Financial AI Agent Project
+
+## Project Overview
+This is a Retrieval-Augmented Generation (RAG) system for financial document analysis built with:
+- **Frontend**: Next.js 14 with TypeScript, shadcn/ui components, Tailwind CSS
+- **Backend**: FastAPI Python service with LlamaIndex integration
+- **LLM**: Local Ollama integration with configurable models
+- **Storage**: Persistent vector store with metadata preservation
+
+## Architecture
+- Hybrid Next.js + Python architecture
+- API proxy pattern between frontend and backend
+- Shared storage between services
+- Docker containerization ready
+
+## Key Technologies
+- **Frontend**: React 18, TypeScript, Tailwind CSS, shadcn/ui
+- **Backend**: Python 3.11, FastAPI, LlamaIndex, Ollama
+- **AI/ML**: Local LLM via Ollama, vector embeddings
+- **Storage**: Local file system with persistent vector index
+- **Testing**: Jest, React Testing Library
+- **Deployment**: Docker, Docker Compose, Nginx
+
+## Development Guidelines
+- Use TypeScript throughout with proper typing
+- Follow React best practices and hooks patterns
+- Implement comprehensive error handling
+- Add logging for debugging and monitoring
+- Write tests for new features
+- Use structured logging with context
+- Follow security best practices for file uploads
+- Implement proper rate limiting
+
+## File Structure
+- `app/`: Next.js app directory with API routes
+- `components/`: Reusable React components
+- `lib/`: Utility functions and integrations
+- `server/`: Python FastAPI backend
+- `storage/`: Persistent data storage
+- `docs/`: Documentation
+- `__tests__/`: Test files
+
+## Common Commands
+- `npm run dev`: Start Next.js development server
+- `npm run py:serve`: Start Python backend server
+- `npm test`: Run test suite
+- `npm run build`: Build for production
+- `docker-compose up`: Start all services with Docker
+
+## Environment Variables
+Check `.env.local.example` for all available configuration options.
+
+## Security Considerations
+- File upload validation and security checks implemented
+- Rate limiting on all API endpoints
+- CORS restrictions configured
+- Input sanitization and validation
+
+## Performance Features
+- Response caching system
+- Memory-efficient caching with cleanup
+- Performance monitoring and metrics
+- Optimized Docker builds
+
+When helping with this project, prioritize:
+1. Type safety and proper TypeScript usage
+2. Security best practices
+3. Performance optimization
+4. Code maintainability and documentation
+5. Test coverage for new features
