@@ -82,7 +82,7 @@ def _to_documents(file_paths: List[Path]) -> List[Document]:
             buffer: List[str] = []
 
             def flush_section():
-                nonlocal buffer, section_index, current_heading
+                nonlocal buffer, section_index
                 if not buffer:
                     return
                 section_index += 1
