@@ -11,9 +11,10 @@ RUN apt-get update && apt-get install -y \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy Python requirements and install dependencies
+# Copy Python requirements and install dependencies with caching
 COPY server/requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
 
 # Copy Python source code
 COPY server/ .
@@ -41,7 +42,7 @@ COPY tailwind.config.ts ./
 COPY postcss.config.mjs ./
 
 # Install dependencies
-RUN npm ci --only=production
+RUN npm ci
 
 # Copy source code
 COPY app/ ./app/
