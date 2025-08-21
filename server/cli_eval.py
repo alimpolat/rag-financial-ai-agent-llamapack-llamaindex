@@ -1,12 +1,13 @@
 from __future__ import annotations
-import argparse
-import json
-import csv
-from pathlib import Path
-from typing import List, Dict, Any, Optional, Tuple
 
-from .llama_setup import configure_llama_index
+import argparse
+import csv
+import json
+from pathlib import Path
+from typing import Any, Dict, List, Optional, Tuple
+
 from .ingest import ingest_files
+from .llama_setup import configure_llama_index
 from .rag import query_index
 
 

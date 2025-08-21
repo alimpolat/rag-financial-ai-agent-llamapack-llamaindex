@@ -1,15 +1,16 @@
+import hashlib
+import logging
+from datetime import datetime
 from pathlib import Path
 from typing import List
-from pypdf import PdfReader
+
 import docx  # python-docx
-from llama_index.core import Document, StorageContext
-import logging
-from llama_index.core import load_index_from_storage
-from .llama_setup import configure_llama_index
-from .config import settings
 from bs4 import BeautifulSoup
-import hashlib
-from datetime import datetime
+from llama_index.core import Document, StorageContext, load_index_from_storage
+from pypdf import PdfReader
+
+from .config import settings
+from .llama_setup import configure_llama_index
 
 
 def _extract_text(file_path: Path) -> str:

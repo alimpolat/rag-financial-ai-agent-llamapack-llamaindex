@@ -1,12 +1,14 @@
-from typing import List, Dict, Optional
 import logging
+from typing import Dict, List, Optional
+
 from llama_index.core import StorageContext, load_index_from_storage
 from llama_index.core.postprocessor import (
-    SentenceTransformerRerank,
     LLMRerank,
+    SentenceTransformerRerank,
 )
-from .llama_setup import configure_llama_index
+
 from .config import settings
+from .llama_setup import configure_llama_index
 
 
 def query_index(

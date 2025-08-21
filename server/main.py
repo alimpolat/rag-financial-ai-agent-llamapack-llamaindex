@@ -1,13 +1,15 @@
+import logging
+from typing import AsyncGenerator, List, Optional
+
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel, Field
-from typing import List, Optional, AsyncGenerator
-from .config import settings
-from .llama_setup import configure_llama_index
-from .ingest import ingest_files
-from .rag import query_index
-import logging
 from fastapi.responses import StreamingResponse
+from pydantic import BaseModel, Field
+
+from .config import settings
+from .ingest import ingest_files
+from .llama_setup import configure_llama_index
+from .rag import query_index
 
 app = FastAPI(title="RAG Financial AI Agent - Python (LlamaIndex)")
 
