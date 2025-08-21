@@ -27,6 +27,7 @@ This project uses a hybrid architecture combining the best of both worlds:
 ## 🚀 Features
 
 ### Advanced RAG Capabilities
+
 - **Multi-format document support**: PDF, DOCX, HTML, TXT, MD
 - **Intelligent chunking**: Page-based for PDFs, section-based for DOCX
 - **Advanced retrieval**: Similarity search + reranking (transformer & LLM-based)
@@ -34,6 +35,7 @@ This project uses a hybrid architecture combining the best of both worlds:
 - **Source attribution**: Rich metadata with relevance scores
 
 ### Production-Ready
+
 - **Rate limiting**: API endpoint protection
 - **Input validation**: Comprehensive schema validation with Zod
 - **Error handling**: Graceful error recovery and user feedback
@@ -41,6 +43,7 @@ This project uses a hybrid architecture combining the best of both worlds:
 - **Configurable**: Environment-based configuration
 
 ### Modern UX
+
 - **Real-time chat interface** with streaming responses
 - **Source citations** with document references
 - **Configurable retrieval parameters** (Top-K, reranking, window size)
@@ -103,6 +106,7 @@ npm run dev
 ```
 
 The application will be available at:
+
 - **Frontend**: http://localhost:3000
 - **Backend API**: http://localhost:8000
 - **API Docs**: http://localhost:8000/docs
@@ -110,12 +114,14 @@ The application will be available at:
 ## 📖 Usage
 
 ### 1. Upload Documents
+
 - Navigate to http://localhost:3000
 - Use the "Upload Knowledge" section
 - Select PDF, DOCX, HTML, TXT, or MD files
 - Click "Ingest Files" to process and index documents
 
 ### 2. Ask Questions
+
 - Use the "Financial Q&A" chat interface
 - Ask questions about your uploaded documents
 - Adjust retrieval parameters:
@@ -124,6 +130,7 @@ The application will be available at:
   - **Window**: Sentence window size for context (1-10)
 
 ### 3. Review Sources
+
 - Each response includes source citations
 - View document names, page numbers, and relevance scores
 - Sources help verify and trace answer origins
@@ -132,17 +139,17 @@ The application will be available at:
 
 ### Environment Variables
 
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `OLLAMA_BASE_URL` | `http://localhost:11434` | Ollama API endpoint |
-| `OLLAMA_MODEL` | `llama3` | Language model name |
-| `OLLAMA_EMBED_MODEL` | `nomic-embed-text` | Embedding model name |
-| `PY_BACKEND_URL` | `http://localhost:8000` | Python backend URL |
-| `CHUNK_SIZE_TOKENS` | `512` | Document chunk size |
-| `CHUNK_OVERLAP_TOKENS` | `64` | Chunk overlap for context |
-| `SIMILARITY_TOP_K` | `5` | Default similarity search results |
-| `ENABLE_RERANK` | `false` | Enable transformer reranking |
-| `ENABLE_LLM_RERANK` | `false` | Enable LLM-based reranking |
+| Variable               | Default                  | Description                       |
+| ---------------------- | ------------------------ | --------------------------------- |
+| `OLLAMA_BASE_URL`      | `http://localhost:11434` | Ollama API endpoint               |
+| `OLLAMA_MODEL`         | `llama3`                 | Language model name               |
+| `OLLAMA_EMBED_MODEL`   | `nomic-embed-text`       | Embedding model name              |
+| `PY_BACKEND_URL`       | `http://localhost:8000`  | Python backend URL                |
+| `CHUNK_SIZE_TOKENS`    | `512`                    | Document chunk size               |
+| `CHUNK_OVERLAP_TOKENS` | `64`                     | Chunk overlap for context         |
+| `SIMILARITY_TOP_K`     | `5`                      | Default similarity search results |
+| `ENABLE_RERANK`        | `false`                  | Enable transformer reranking      |
+| `ENABLE_LLM_RERANK`    | `false`                  | Enable LLM-based reranking        |
 
 ### Advanced Configuration
 
@@ -215,6 +222,7 @@ QUESTIONS=questions.txt TOP_K=10 npm run py:eval
 ### Customizing Retrieval
 
 Modify retrieval behavior in `server/rag.py`:
+
 - Adjust similarity thresholds
 - Add custom post-processors
 - Implement domain-specific ranking
@@ -253,6 +261,7 @@ docker build -t rag-backend ./server
 ### Common Issues
 
 **Ollama Connection Failed**
+
 ```bash
 # Check if Ollama is running
 ollama list
@@ -262,6 +271,7 @@ ollama serve
 ```
 
 **Python Dependencies**
+
 ```bash
 # Recreate virtual environment
 rm -rf .venv
@@ -269,6 +279,7 @@ npm run py:install
 ```
 
 **Port Conflicts**
+
 ```bash
 # Change ports in .env.local
 echo "PY_PORT=8001" >> .env.local
@@ -301,3 +312,5 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - [Next.js Documentation](https://nextjs.org/docs)
 - [FastAPI Documentation](https://fastapi.tiangolo.com/)
 - [shadcn/ui Components](https://ui.shadcn.com/)
+
+# Trigger new CI/CD run
