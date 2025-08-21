@@ -183,7 +183,8 @@ jobs:
 
       - name: Notify deployment (optional)
         uses: 8398a7/action-slack@v3
-        if: secrets.SLACK_WEBHOOK_URL != ''
+        if: always()
+        continue-on-error: true
         with:
           status: ${{ job.status }}
           text: 'Deployment completed for RAG Financial AI Agent'
