@@ -13,6 +13,7 @@ app = FastAPI(title="RAG Financial AI Agent - Python (LlamaIndex)")
 
 # CORS configuration - restrictive by default, configurable via environment
 import os
+
 allowed_origins = os.getenv("CORS_ORIGINS", "http://localhost:3000,http://localhost:3001").split(",")
 app.add_middleware(
     CORSMiddleware,
@@ -51,7 +52,9 @@ async def health():
 
 @app.post("/ingest")
 async def ingest(req: IngestRequest, request: Request):
-    logging.getLogger("api").info("/ingest from %s with %d path(s)", request.client.host if request.client else "?", len(req.file_paths))
+    logging.getLogger("api").info(
+        "/ingest from %s with %d path(s)", request.client.host if request.client else "?", len(req.file_paths)
+    )
     if not req.file_paths:
         return {"ingested": 0}
     count = ingest_files(req.file_paths)
@@ -60,7 +63,9 @@ async def ingest(req: IngestRequest, request: Request):
 
 @app.post("/chat")
 async def chat(req: ChatRequest, request: Request):
-    logging.getLogger("api").info("/chat from %s qlen=%d", request.client.host if request.client else "?", len(req.question))
+    logging.getLogger("api").info(
+        "/chat from %s qlen=%d", request.client.host if request.client else "?", len(req.question)
+    )
     result = query_index(
         req.question,
         top_k=req.top_k,
@@ -73,7 +78,9 @@ async def chat(req: ChatRequest, request: Request):
 
 @app.post("/chat_stream")
 async def chat_stream(req: ChatRequest, request: Request):
-    logging.getLogger("api").info("/chat_stream from %s qlen=%d", request.client.host if request.client else "?", len(req.question))
+    logging.getLogger("api").info(
+        "/chat_stream from %s qlen=%d", request.client.host if request.client else "?", len(req.question)
+    )
 
     def sse_format(data: str, event: Optional[str] = None) -> bytes:
         if event:
@@ -97,9 +104,12 @@ async def chat_stream(req: ChatRequest, request: Request):
         effective_llm_rerank = settings.enable_llm_rerank if req.enable_llm_rerank is None else req.enable_llm_rerank
         if effective_rerank:
             try:
-                node_postprocessors.append(SentenceTransformerRerank(top_n=settings.rerank_top_n, model=settings.rerank_model))
+                node_postprocessors.append(
+                    SentenceTransformerRerank(top_n=settings.rerank_top_n, model=settings.rerank_model)
+                )
             except Exception as e:
                 import logging as _logging
+
                 _logging.getLogger("api").warning(
                     "SentenceTransformerRerank unavailable, skipping (install torch & sentence-transformers). Reason: %s",
                     e,
@@ -138,16 +148,19 @@ async def chat_stream(req: ChatRequest, request: Request):
                         score_val = float(score_val)
                 except Exception:
                     pass
-                sources.append({
-                    "score": score_val,
-                    "text": text,
-                    "metadata": meta,
-                    "snippet": snippet,
-                })
+                sources.append(
+                    {
+                        "score": score_val,
+                        "text": text,
+                        "metadata": meta,
+                        "snippet": snippet,
+                    }
+                )
         except Exception:
             pass
 
         import json as _json
+
         yield sse_format(_json.dumps({"sources": sources}), event="sources")
 
     return StreamingResponse(token_generator(), media_type="text/event-stream")
@@ -156,4 +169,5 @@ async def chat_stream(req: ChatRequest, request: Request):
 # Entrypoint for running via `python -m server.main`
 if __name__ == "__main__":
     import uvicorn
+
     uvicorn.run("server.main:app", host=settings.host, port=settings.port, reload=True)

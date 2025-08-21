@@ -112,7 +112,11 @@ def _to_documents(file_paths: List[Path]) -> List[Document]:
             flush_section()
 
             # Fallback: if no sections created, index whole doc
-            if not any(doc.metadata.get("section_index") is not None for doc in docs if doc.metadata.get("doc_id") == base_meta["doc_id"]):
+            if not any(
+                doc.metadata.get("section_index") is not None
+                for doc in docs
+                if doc.metadata.get("doc_id") == base_meta["doc_id"]
+            ):
                 full_text = _extract_text(p)
                 if full_text.strip():
                     docs.append(Document(text=full_text, metadata=base_meta))
@@ -176,6 +180,7 @@ def ingest_files(file_paths: List[str]) -> int:
     except Exception as e:
         logger.info("Initializing new index due to: %s", getattr(e, "__class__", type(e)).__name__)
         from llama_index.core import VectorStoreIndex
+
         storage_context = StorageContext.from_defaults()
         index = VectorStoreIndex.from_documents(documents, storage_context=storage_context)
         index.storage_context.persist(str(settings.index_dir))

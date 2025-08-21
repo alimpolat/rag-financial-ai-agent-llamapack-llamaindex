@@ -31,8 +31,12 @@ def extract_top_source(sources: List[Dict[str, Any]]) -> Tuple[Optional[str], Op
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Evaluate RAG with a list of questions using Ollama and sentence-window retrieval.")
-    parser.add_argument("--questions", type=str, required=True, help="Path to a .text or .txt file, one question per line")
+    parser = argparse.ArgumentParser(
+        description="Evaluate RAG with a list of questions using Ollama and sentence-window retrieval."
+    )
+    parser.add_argument(
+        "--questions", type=str, required=True, help="Path to a .text or .txt file, one question per line"
+    )
     parser.add_argument("--top-k", type=int, default=None, help="Retriever top_k (overrides SIMILARITY_TOP_K)")
     parser.add_argument("--ingest", nargs="*", help="Optional list of file paths to ingest before evaluation")
     parser.add_argument("--out", type=str, default="eval_results.jsonl", help="Output JSONL path")
@@ -75,7 +79,9 @@ def main() -> None:
 
                 if csv_writer:
                     top_src, score = extract_top_source(record["sources"])  # type: ignore[index]
-                    csv_writer.writerow([q, (record["answer"] or "").strip(), top_src or "", score if score is not None else ""])
+                    csv_writer.writerow(
+                        [q, (record["answer"] or "").strip(), top_src or "", score if score is not None else ""]
+                    )
                 num_ok += 1
             except Exception as e:
                 jsonl_file.write(json.dumps({"question": q, "error": str(e)}) + "\n")

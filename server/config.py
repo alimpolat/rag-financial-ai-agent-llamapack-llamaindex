@@ -2,6 +2,7 @@ from pydantic import Field
 from pydantic_settings import BaseSettings
 from pathlib import Path
 
+
 class Settings(BaseSettings):
     ollama_base_url: str = Field(default="http://localhost:11434", validation_alias="OLLAMA_BASE_URL")
     ollama_model: str = Field(default="llama3", validation_alias="OLLAMA_MODEL")
@@ -30,5 +31,6 @@ class Settings(BaseSettings):
         env_file = ".env.local"
         env_file_encoding = "utf-8"
         extra = "allow"  # allow unrelated keys like PY_BACKEND_URL
+
 
 settings = Settings()  # singleton

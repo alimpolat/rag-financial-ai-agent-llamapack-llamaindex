@@ -38,9 +38,7 @@ def query_index(
                 e,
             )
     if effective_llm_rerank:
-        node_postprocessors.append(
-            LLMRerank(choice_top_k=settings.llm_rerank_top_n)
-        )
+        node_postprocessors.append(LLMRerank(choice_top_k=settings.llm_rerank_top_n))
 
     query_engine = index.as_query_engine(
         similarity_top_k=top_k,
@@ -64,12 +62,14 @@ def query_index(
                     score_val = float(score_val)
             except Exception:
                 pass
-            sources.append({
-                "score": score_val,
-                "text": text,
-                "metadata": meta,
-                "snippet": snippet,
-            })
+            sources.append(
+                {
+                    "score": score_val,
+                    "text": text,
+                    "metadata": meta,
+                    "snippet": snippet,
+                }
+            )
     except Exception:
         pass
 
